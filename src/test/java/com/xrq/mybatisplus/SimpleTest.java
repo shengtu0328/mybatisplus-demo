@@ -27,7 +27,6 @@ public class SimpleTest {
     @Test
     public void select() {
         List<User> userList = userMapper.selectList(null);
-        Assert.assertEquals(16, userList.size());
         userList.forEach(System.out::println);
     }
 
