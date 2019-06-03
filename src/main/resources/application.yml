@@ -5,7 +5,9 @@ spring:
     username: root
     password: 123456
 
-#logging:
-#  level:
-#    root:warn
-#    com.xrq.mybatisplus.dao:trace
+logging:
+  level:
+    root: warn
+    com.xrq.mybatisplus.dao: trace
+  pattern:
+    console: '%p%m%n'
