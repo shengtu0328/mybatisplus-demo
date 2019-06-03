@@ -90,6 +90,7 @@ public class SimpleTest {
     public void selectByWrapper2(){
         QueryWrapper<User> queryWrapper= new QueryWrapper<User>();
         //QueryWrapper<User> query= Wrappers.query();
+        //key为数据库的列名，不是实体中的属性名
 
         queryWrapper.like("name","雨").between("age",20,40).isNotNull("email");
         List<User> userList = userMapper.selectList(queryWrapper);
@@ -104,10 +105,64 @@ public class SimpleTest {
     public void selectByWrapper3(){
         QueryWrapper<User> queryWrapper= new QueryWrapper<User>();
         //QueryWrapper<User> query= Wrappers.query();
-
+        //key为数据库的列名，不是实体中的属性名
         queryWrapper.likeRight("name","王")
                 .or()
                 .ge("age",25).orderByDesc("age").orderByAsc("id");
+        List<User> userList = userMapper.selectList(queryWrapper);
+        userList.forEach(System.out::println);
+    }
+
+
+    @Test
+    //条件构造器查询 创建日期为2019年2月14 并且 直属上级名字为王姓
+    //date_format(create_time,'%Y-%m-%d') and  manager_id in (select id from t_user where name like '王%')
+    public void selectByWrapper4(){
+        QueryWrapper<User> queryWrapper= new QueryWrapper<User>();
+        //QueryWrapper<User> query= Wrappers.query();
+        //key为数据库的列名，不是实体中的属性名
+        queryWrapper
+                .apply("date_format(create_time,'%Y-%m-%d') ={0}","2019-02-14")  //这种方式不会sql注入
+                //.apply("date_format(create_time,'%Y-%m-%d') ='2019-02-14'") //这样写有可能会引起sql注入 比如 '2019-02-14' or true or true,会查出全部记录
+                .inSql(" manager_id","select id from t_user where name like '王%'");
+        List<User> userList = userMapper.selectList(queryWrapper);
+        userList.forEach(System.out::println);
+    }
+
+
+
+
+    @Test
+    //条件构造器查询
+    //name like ‘王%’ and (age<40 or email is not null)
+    public void selectByWrapper5(){
+        QueryWrapper<User> queryWrapper= new QueryWrapper<User>();
+        //QueryWrapper<User> query= Wrappers.query();
+        //key为数据库的列名，不是实体中的属性名
+        queryWrapper.likeRight("name","王")
+                .and(wq->wq.lt("age",10).or().isNotNull("email"));
+
+
+        List<User> userList = userMapper.selectList(queryWrapper);
+        userList.forEach(System.out::println);
+    }
+
+
+
+
+
+
+    @Test
+    //条件构造器查询
+    //name like ‘王%’ or (age<40 and age>20 and email is not null)
+    public void selectByWrapper6(){
+        QueryWrapper<User> queryWrapper= new QueryWrapper<User>();
+        //QueryWrapper<User> query= Wrappers.query();
+        //key为数据库的列名，不是实体中的属性名
+        queryWrapper.likeRight("name","王")
+                .or(wq->wq.lt("age",40).gt("age",20).isNotNull("email"));
+
+
         List<User> userList = userMapper.selectList(queryWrapper);
         userList.forEach(System.out::println);
     }
