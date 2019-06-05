@@ -210,8 +210,8 @@ public class SimpleTest {
     public void selectByWrapperSelect() {
         QueryWrapper<User> queryWrapper = new QueryWrapper<User>();
         //QueryWrapper<User> query= Wrappers.query();
-        //key为数据库的列名，不是实体中的属性名
-        queryWrapper.select("id","name","age","email").like("name","雨").lt("age",40);
+        //select的列名如果和属性名不一致 可以这么写
+        queryWrapper.select("id userId","name realName","age","email").like("name","雨").lt("age",40);
 
         List<User> userList = userMapper.selectList(queryWrapper);
         userList.forEach(System.out::println);
@@ -230,7 +230,7 @@ public class SimpleTest {
     }
 
     @Test
-    //条件构造器查询 select不列出全部字段
+    //条件构造器查询 select不列出全部字段 Condition
     public void selectByWrapperCondition() {
         QueryWrapper<User> queryWrapper = new QueryWrapper<User>();
         //QueryWrapper<User> query= Wrappers.query();
@@ -259,6 +259,54 @@ public class SimpleTest {
 
         QueryWrapper<User> queryWrapper = new QueryWrapper<User>(whereUser);
         //queryWrapper.like("name", "雨").lt("age", 40); //可以继续条件查询 不冲突
+        List<User> userList = userMapper.selectList(queryWrapper);
+        userList.forEach(System.out::println);
+    }
+
+
+    @Test //allEq的作用可以把参数map中 key对应的value为null进行处理  true  xx is null  false  去除 xx
+    public void selectByWrapperAllEq() {
+
+
+        QueryWrapper<User> queryWrapper = new QueryWrapper<User>();
+        Map<String,Object> parms= new HashMap<String,Object>();
+        parms.put("name","王天风");
+        //parms.put("age",25);
+        parms.put("age",null);//sql里就是age IS NULL
+
+        queryWrapper.allEq(parms);
+        List<User> userList = userMapper.selectList(queryWrapper);
+        userList.forEach(System.out::println);
+    }
+
+
+
+    @Test
+    public void selectByWrapperAllEq2() {
+
+
+        QueryWrapper<User> queryWrapper = new QueryWrapper<User>();
+        Map<String,Object> parms= new HashMap<String,Object>();
+        parms.put("name","王天风");
+        //parms.put("age",25);
+        parms.put("age",null);
+
+        queryWrapper.allEq(parms,false);//设置为false map中 value为null的会忽略掉
+        List<User> userList = userMapper.selectList(queryWrapper);
+        userList.forEach(System.out::println);
+    }
+
+
+    @Test
+    public void selectByWrapperAllEq3() {
+
+        QueryWrapper<User> queryWrapper = new QueryWrapper<User>();
+        Map<String,Object> parms= new HashMap<String,Object>();
+        parms.put("name","王天风");
+        //parms.put("age",25);
+        parms.put("age",null);
+
+        queryWrapper.allEq((k,v)->!k.equals("name"),parms);// 满足条件的（true）才会添加到条件中
         List<User> userList = userMapper.selectList(queryWrapper);
         userList.forEach(System.out::println);
     }
