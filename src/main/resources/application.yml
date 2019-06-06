@@ -11,3 +11,13 @@ logging:
     com.xrq.mybatisplus.dao: trace
   pattern:
     console: '%p%m%n'
+
+mybatis-plus:
+ global-config:
+   db-config:
+     id-type: AUTO
+ mapper-locations:
+   mapper/*
+
+
+# xml存放路径

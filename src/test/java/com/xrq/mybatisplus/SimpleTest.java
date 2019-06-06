@@ -42,6 +42,8 @@ public class SimpleTest {
         user.setRemark("备注111");
         int rows = userMapper.insert(user);
         System.out.println("影响记录数" + rows);
+        System.out.println("主键id" + user.getUserId());
+
     }
 
     @Test
@@ -210,8 +212,8 @@ public class SimpleTest {
     public void selectByWrapperSelect() {
         QueryWrapper<User> queryWrapper = new QueryWrapper<User>();
         //QueryWrapper<User> query= Wrappers.query();
-        //select的列名如果和属性名不一致 可以这么写
-        queryWrapper.select("id userId","name realName","age","email").like("name","雨").lt("age",40);
+        //select的列名如果和属性名不一致 可以这么写,但是没有查询的列映射到属性会变成null
+        queryWrapper.select("id userId","name realName","email").like("name","雨").lt("age",40);
 
         List<User> userList = userMapper.selectList(queryWrapper);
         userList.forEach(System.out::println);

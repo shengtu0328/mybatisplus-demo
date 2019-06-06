@@ -1,9 +1,6 @@
 package com.xrq.mybatisplus.entity;
 
-import com.baomidou.mybatisplus.annotation.SqlCondition;
-import com.baomidou.mybatisplus.annotation.TableField;
-import com.baomidou.mybatisplus.annotation.TableId;
-import com.baomidou.mybatisplus.annotation.TableName;
+import com.baomidou.mybatisplus.annotation.*;
 import lombok.Data;
 
 import java.time.LocalDateTime;
@@ -12,9 +9,8 @@ import java.time.LocalDateTime;
 @TableName("t_user")//如果类名和表名相同就可以自动映射（不需要此注解），如果不一样可以使用此注解，并添加属性进行绑定
 public class User {
 
-
     //主键                //mp默认只会为属性名叫 id 的字段填充主键，如果不是叫id不会为他填充
-    @TableId("id")      //如果此属性对应主键，并且属性和表的主键列名不对应，就可以用@TableId修饰设置绑定关系   ，@TableField 同理
+    @TableId(value="id",type=IdType.INPUT)      //如果此属性对应主键，并且属性和表的主键列名不对应，就可以用@TableId修饰设置绑定关系   ，@TableField 同理
     private Long userId;
 
     //姓名
