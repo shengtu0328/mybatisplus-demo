@@ -17,7 +17,7 @@ mybatis-plus:
    db-config:
      id-type: AUTO
  mapper-locations:
-   mapper/*
-
-
+    mapper/*
+ config-location: classpath:mybatis-config.xml
+ type-aliases-package: com.xrq.mybatisplus.entity
 # xml存放路径
