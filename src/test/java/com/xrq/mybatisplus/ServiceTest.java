@@ -88,4 +88,13 @@ public class ServiceTest {
         boolean b = userService.lambdaUpdate().eq(User::getAge, 28).remove();
         System.out.println(b);
     }
+
+
+    @Test
+    public void servicefindList() {
+         userService.servicefindList();
+    }
+
+
+
 }
