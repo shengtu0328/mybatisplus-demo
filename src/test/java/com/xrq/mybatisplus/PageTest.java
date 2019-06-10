@@ -64,7 +64,7 @@ public class PageTest {
     }
 
     @Test
-    public void findList() {
+    public void findList() {        //自定义的分页查询 如果用QueryWrapper条件，则在xml中 需要加上${ew.customSqlSegment} ，不然QueryWrapper无效
         QueryWrapper<User> queryWrapper = new QueryWrapper<User>();
         queryWrapper.ge("age",40);
         Page<User> page = new Page<>(1, 5,false);
@@ -74,12 +74,14 @@ public class PageTest {
     }
 
     @Test
-    public void findList2() {
+    public void findList2() {  //自定义的分页查询 如果用QueryWrapper条件，则在xml中 需要加上${ew.customSqlSegment} ，不然QueryWrapper无效
         QueryWrapper<User> queryWrapper = new QueryWrapper<User>();
         queryWrapper.ge("age",40);
         Page<User> page = new Page<>(1, 5,false);
 
         Page<User> list2 = userMapper.findList2(page, queryWrapper);
+        System.out.println(list2.getTotal());
+
         list2.getRecords().forEach(System.out::println);
     }
 }
