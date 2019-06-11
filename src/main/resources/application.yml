@@ -16,8 +16,10 @@ mybatis-plus:
  global-config:
    db-config:
      id-type: AUTO
+ #    table-prefix: mp_   设置表名字前缀
  mapper-locations:
-    mapper/*
- config-location: classpath:mybatis-config.xml
+    mapper/*           # xml存放路径
+ #config-location: classpath:mybatis-config.xml
  type-aliases-package: com.xrq.mybatisplus.entity
-# xml存放路径
+ configuration:      # configuration和 config-location:不能同时出现，否则会报错
+   map-underscore-to-camel-case: true #开启默认驼峰属性名和列名映射 ,mp默认就是true（mybatis默认是false）。
