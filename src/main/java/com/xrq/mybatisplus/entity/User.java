@@ -29,6 +29,7 @@ public class User {
     private Long managerId;
 
     //创建时间
+    @TableField(fill = FieldFill.INSERT)
     private LocalDateTime createTime;
 
     @TableField(exist = false)//exist = false代表他不是数据库的字段

@@ -34,10 +34,10 @@ public class SimpleTest {
     @Test
     public void insert() {
         User user = new User();                               //id如果不设置 默认填充一个基于雪花算法的自增id
-        user.setRealName("xrq5");
+        user.setRealName("xrq66");
         user.setAge(23);
         user.setManagerId(1088248166370832385l);             //默认数据库中的列名_  对应 实体类属性的驼峰
-        user.setCreateTime(LocalDateTime.now());
+//        user.setCreateTime(LocalDateTime.now());
 
         user.setRemark("备注111");
         int rows = userMapper.insert(user);
