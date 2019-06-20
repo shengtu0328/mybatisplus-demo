@@ -25,8 +25,21 @@ public class PageTest {
     @Test
     public void selectPage() {
         QueryWrapper<User> queryWrapper = new QueryWrapper<User>();
+        queryWrapper.eq("age",41);
+        Page<User> page = new Page<>(1, 6);    //current是第几页 size是每页打大小
+
+        IPage<User> IPage = userMapper.selectPage(page, queryWrapper);
+        System.out.println("总页数" + IPage.getPages());
+        System.out.println("总记录数" + IPage.getTotal());
+        List<User> userList = IPage.getRecords();
+        userList.forEach(System.out::println);
+    }
+
+    @Test
+    public void selectPageFalse() {
+        QueryWrapper<User> queryWrapper = new QueryWrapper<User>();
         queryWrapper.ge("age",22);
-        Page<User> page = new Page<>(2, 5);    //current是第几页 size是每页打大小
+        Page<User> page = new Page<>(2, 5,false);  //传false  不会去查总记录数
 
         IPage<User> IPage = userMapper.selectPage(page, queryWrapper);
         System.out.println("总页数" + IPage.getPages());
@@ -50,18 +63,6 @@ public class PageTest {
     }
 
 
-    @Test
-    public void selectPageFalse() {
-        QueryWrapper<User> queryWrapper = new QueryWrapper<User>();
-        queryWrapper.ge("age",22);
-        Page<User> page = new Page<>(2, 5,false);  //传false  不会去查总记录数
-
-        IPage<User> IPage = userMapper.selectPage(page, queryWrapper);
-        System.out.println("总页数" + IPage.getPages());
-        System.out.println("总记录数" + IPage.getTotal());
-        List<User> userList = IPage.getRecords();
-        userList.forEach(System.out::println);
-    }
 
     @Test
     public void findList() {        //自定义的分页查询 如果用QueryWrapper条件，则在xml中 需要加上${ew.customSqlSegment} ，不然QueryWrapper无效
