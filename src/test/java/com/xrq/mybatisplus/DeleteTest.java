@@ -75,7 +75,7 @@ public class DeleteTest {
         System.out.println("影响记录数"+rows);
     }
 
-    // 配置过逻辑删除，只查询未逻辑删除的记录
+    // 配置过逻辑删除，只查询未逻辑删除的记录（但是自定义的查询不会只查询未逻辑删除的记录）
     @Test
     public void select() {
         List<User> userList = userMapper.selectList(null);

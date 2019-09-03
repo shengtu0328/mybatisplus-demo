@@ -4,10 +4,10 @@
 <mapper namespace="com.xrq.mybatisplus.dao.UserMapper">
 
     <select id="findList" resultType="User">
-        select * from t_user ${ew.customSqlSegment}
+        select * from user ${ew.customSqlSegment}
     </select>
 
     <select id="findList2" resultType="com.xrq.mybatisplus.entity.User">
-        select * from t_user ${ew.customSqlSegment}
+        select * from user ${ew.customSqlSegment}
     </select>
 </mapper>

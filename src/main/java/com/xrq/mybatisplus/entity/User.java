@@ -10,7 +10,7 @@ import java.time.LocalDateTime;
 public class User {
 
     //主键                //mp默认只会为属性名叫 id 的字段填充主键，如果不是叫id不会为他填充
-    @TableId(value="id",type=IdType.INPUT)      //如果此属性对应主键，并且属性和表的主键列名不对应，就可以用@TableId修饰设置绑定关系   ，@TableField 同理
+    @TableId(value="id",type=IdType.ID_WORKER)      //如果此属性对应主键，并且属性和表的主键列名不对应，就可以用@TableId修饰设置绑定关系   ，@TableField 同理
     private Long userId;
 
     //姓名
@@ -32,14 +32,19 @@ public class User {
     @TableField(fill = FieldFill.INSERT)
     private LocalDateTime createTime;
 
+    //创建时间
+    @TableField(fill = FieldFill.UPDATE)
+    private LocalDateTime updateTime;
+
     @TableField(exist = false)//exist = false代表他不是数据库的字段
     private String remark;
 
     //版本
     private Integer version;
 
-    //逻辑删除表示（0 未删除 1已删除）
-    @TableLogic
+
+    @TableLogic //逻辑删除表示（0 未删除 1已删除）
+    @TableField(select = false) //查询的时候不查这一列
     private Integer deleted;
 
 }
