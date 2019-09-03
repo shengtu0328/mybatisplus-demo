@@ -225,7 +225,7 @@ public class SimpleTest {
         //QueryWrapper<User> query= Wrappers.query();
         //key为数据库的列名，不是实体中的属性名
         queryWrapper.select(User.class,tableFieldInfo -> !tableFieldInfo.getColumn().equals("create_time")&&
-                !tableFieldInfo.getColumn().equals("manager_id"));
+                !tableFieldInfo.getColumn().equals("manager_id"));//查的时候排除create_time和manager_id
 
         List<User> userList = userMapper.selectList(queryWrapper);
         userList.forEach(System.out::println);
