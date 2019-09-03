@@ -16,7 +16,9 @@ mybatis-plus:
  global-config:
    db-config:
      id-type: AUTO
- #    table-prefix: mp_   设置表名字前缀
+     logic-not-delete-value: 0  #字段值为0代表逻辑未删除
+     logic-delete-value: 1      #字段值为1代表逻辑已删除
+   #    table-prefix: mp_   设置表名字前缀
  mapper-locations:
     mapper/*           # xml存放路径
  #config-location: classpath:mybatis-config.xml

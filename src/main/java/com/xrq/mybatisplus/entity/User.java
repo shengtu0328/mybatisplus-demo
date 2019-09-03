@@ -6,7 +6,7 @@ import lombok.Data;
 import java.time.LocalDateTime;
 
 @Data
-@TableName("t_user")//如果类名和表名相同就可以自动映射（不需要此注解），如果不一样可以使用此注解，并添加属性进行绑定
+//@TableName("t_user")//如果类名和表名相同就可以自动映射（不需要此注解），如果不一样可以使用此注解，并添加属性进行绑定
 public class User {
 
     //主键                //mp默认只会为属性名叫 id 的字段填充主键，如果不是叫id不会为他填充
@@ -34,4 +34,12 @@ public class User {
 
     @TableField(exist = false)//exist = false代表他不是数据库的字段
     private String remark;
+
+    //版本
+    private Integer version;
+
+    //逻辑删除表示（0 未删除 1已删除）
+    @TableLogic
+    private Integer deleted;
+
 }

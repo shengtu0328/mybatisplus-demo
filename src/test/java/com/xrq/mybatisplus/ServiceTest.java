@@ -7,7 +7,6 @@ import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.xrq.mybatisplus.dao.UserMapper;
 import com.xrq.mybatisplus.entity.User;
-import com.xrq.mybatisplus.entity.UserIdName;
 import com.xrq.mybatisplus.service.UserService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
