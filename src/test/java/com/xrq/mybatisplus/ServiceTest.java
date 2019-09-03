@@ -2,9 +2,12 @@ package com.xrq.mybatisplus;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.xrq.mybatisplus.dao.UserMapper;
 import com.xrq.mybatisplus.entity.User;
+import com.xrq.mybatisplus.entity.UserIdName;
 import com.xrq.mybatisplus.service.UserService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -95,6 +98,38 @@ public class ServiceTest {
          userService.servicefindList();
     }
 
+
+
+    @Test
+    public void page() {
+        Page<User> page = new Page<>(1, 5);
+        QueryWrapper<User> queryWrapper = new QueryWrapper<User>();
+        queryWrapper.select("id userId","name realName").like("name", "雨").lt("age", 40);
+        IPage<User> Ipage = userService.page(page, queryWrapper);
+//        List<User> records = Ipage.getRecords();
+//        records.stream().forEach(System.out::println);
+//        System.out.println(Ipage);
+
+        Ipage.getRecords().stream().forEach(System.out::println);
+    }
+
+
+
+
+
+
+    @Test
+    public void pageMaps() {
+        Page<User> page = new Page<>(1, 5);
+        QueryWrapper<User> queryWrapper = new QueryWrapper<User>();
+        queryWrapper.select("id userId","name realName").like("name", "雨").lt("age", 40);
+        IPage<Map<String, Object>> Ipage = userService.pageMaps(page, queryWrapper);
+//        List<User> records = Ipage.getRecords();
+//        records.stream().forEach(System.out::println);
+//        System.out.println(Ipage);
+
+        Ipage.getRecords().stream().forEach(System.out::println);
+    }
 
 
 }
