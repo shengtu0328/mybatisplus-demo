@@ -1,5 +1,6 @@
 package com.xrq.mybatisplus.config;
 
+import com.baomidou.mybatisplus.extension.plugins.OptimisticLockerInterceptor;
 import com.baomidou.mybatisplus.extension.plugins.PaginationInterceptor;
 import com.baomidou.mybatisplus.extension.plugins.PerformanceInterceptor;
 import org.springframework.context.annotation.Bean;
@@ -39,6 +40,12 @@ public class MybatisPlusConfig {
         return new PerformanceInterceptor()
                 .setFormat(true)//格式化sql
                 .setMaxTime(5);//超过5毫秒就让sql停止
+    }
+
+    //乐观锁
+    @Bean
+    public OptimisticLockerInterceptor optimisticLockerInterceptor() {
+        return new OptimisticLockerInterceptor();
     }
 
 
