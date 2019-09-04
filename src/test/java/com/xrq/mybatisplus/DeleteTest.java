@@ -82,7 +82,7 @@ public class DeleteTest {
         userList.forEach(System.out::println);
     }
 
-    // 配置过逻辑删除，只会修改逻辑删除的记录
+    // 配置过逻辑删除，只会修改未逻辑删除的记录
     @Test
     public void updateById() {
         User user=new User();
