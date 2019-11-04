@@ -85,4 +85,15 @@ public class PageTest {
 
         list2.getRecords().forEach(System.out::println);
     }
+
+    @Test
+    public void findList3() {  //自定义的分页查询 如果用QueryWrapper条件，则在xml中 需要加上${ew.customSqlSegment} ，不然QueryWrapper无效
+
+        Page<User> page = new Page<>(1, 5,false);
+
+        Page<User> list2 = userMapper.findList3(page, "王天风");
+        System.out.println(list2.getTotal());
+
+        list2.getRecords().forEach(System.out::println);
+    }
 }

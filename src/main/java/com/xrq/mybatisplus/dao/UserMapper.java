@@ -21,5 +21,8 @@ public interface UserMapper extends BaseMapper<User> {
     List<User> findList(Page<User> page,@Param(Constants.WRAPPER) QueryWrapper queryWrapper);
 
     Page<User> findList2(Page<User> page, @Param(Constants.WRAPPER) QueryWrapper queryWrapper);
+    Page<User> findList3(Page<User> page,String name);
+
+
 
 }

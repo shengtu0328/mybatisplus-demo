@@ -10,4 +10,8 @@
     <select id="findList2" resultType="com.xrq.mybatisplus.entity.User">
         select * from user ${ew.customSqlSegment}
     </select>
+
+    <select id="findList3" resultType="com.xrq.mybatisplus.entity.User">
+        select * from user where name=#{name}
+    </select>
 </mapper>

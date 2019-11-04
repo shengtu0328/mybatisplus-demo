@@ -1,5 +1,7 @@
 package com.xrq.mybatisplus.config;
 
+import com.baomidou.mybatisplus.core.injector.ISqlInjector;
+import com.baomidou.mybatisplus.extension.injector.LogicSqlInjector;
 import com.baomidou.mybatisplus.extension.plugins.OptimisticLockerInterceptor;
 import com.baomidou.mybatisplus.extension.plugins.PaginationInterceptor;
 import com.baomidou.mybatisplus.extension.plugins.PerformanceInterceptor;
@@ -22,12 +24,12 @@ public class MybatisPlusConfig {
 
 
     /**
-     * 分页插件 3.1.1版本的mp不需要写
+     * 逻辑删除插件 3.1.1版本的mp不需要写
      */
-//    @Bean
-//    public ISqlInjector sqlInjector() {
-//        return new LogicSqlInjector();
-//    }
+    @Bean
+    public ISqlInjector sqlInjector() {
+        return new LogicSqlInjector();
+    }
 
 
     /**
@@ -39,7 +41,7 @@ public class MybatisPlusConfig {
     public PerformanceInterceptor performanceInterceptor() {
         return new PerformanceInterceptor()
                 .setFormat(true)//格式化sql
-                .setMaxTime(5);//超过5毫秒就让sql停止
+                .setMaxTime(5000);//超过5毫秒就让sql停止
     }
 
     //乐观锁
