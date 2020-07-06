@@ -2,6 +2,7 @@ package com.xrq.mybatisplus;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.StringUtils;
+import com.xrq.mybatisplus.config.MybatisPlusConfig;
 import com.xrq.mybatisplus.dao.UserMapper;
 import com.xrq.mybatisplus.entity.User;
 import org.junit.Assert;
@@ -26,7 +27,13 @@ public class SimpleTest {
 
     @Test
     public void select() {
+        MybatisPlusConfig.myTableName.set("user_2001");
         List<User> userList = userMapper.selectList(null);
+        userList.forEach(System.out::println);
+
+
+        MybatisPlusConfig.myTableName.remove();
+        List<User> userList2 = userMapper.selectList(null);
         userList.forEach(System.out::println);
     }
 
